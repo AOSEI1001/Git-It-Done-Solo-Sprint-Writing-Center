@@ -1,0 +1,17 @@
+
+#filter-btn .fa{
+    font-size: 1.0rem !important;
+    line-height: 1 !important;
+}
+
+.tutor_grid{
+    height: auto;
+    width: auto;
+    display : grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.tutor_grid .card-body{
+    
+}
+
