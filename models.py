@@ -51,7 +51,7 @@ class TutorRequest(db.Model):
     courseName = db.Column(db.String(200), nullable=False)
     facultyName = db.Column(db.String(200), nullable=False)
     facultyEmail = db.Column(db.String(200), nullable=False)
-    requestedTutor = db.Column(db.String(200), nullable=False)
+    requestedTutor = db.Column(db.String(200), nullable=True)
     courseDescription = db.Column(db.String(200), nullable=False)
     requestStatus = db.Column(db.String(200), nullable=False, default="Open")
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
