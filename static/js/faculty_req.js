@@ -27,11 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("createRequestForm").reset();
 
         
-        const modal = document.getElementById("createRequestForm");
-        modal.classList.remove("show");
-        modal.style.display = "none";
-
-        this.reset()
+    
     });
 });
 
