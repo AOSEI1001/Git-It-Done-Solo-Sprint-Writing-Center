@@ -28,8 +28,8 @@
   <!-- Nucleo Icons -->
   <link href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-svg.css" rel="stylesheet" />
-  <!-- Font Awesome Icons 
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> -->
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> 
   <!-- CSS Files -->
   <link id="pagestyle" href="../static/css/soft-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
   <link id="pagestyle" href="../static/css/catalogCustom.css" rel="stylesheet" />
@@ -73,7 +73,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="{{ url_for('main.tutor_catalog') }}">
+          <a class="nav-link active  bg-secondary-subtle" href="{{ url_for('main.tutor_catalog') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg fill="#000000" height="70%" width="70%" version="1.1" id="XMLID_237_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                   viewBox="0 0 24 24" xml:space="preserve">
@@ -233,23 +233,34 @@
         </div>
         
         <div class="tutor-grid-container card p-4 ">
-          <div id="tutor_grid" class="row mt-4">
+          <div id="tutor_grid" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
             {% for tutor in tutors %}
-            <div class="col-lg-4 col-md-6 col-12 mb-4">
-              <div class="card shadow tutor_card">
+            <div class="col-lg-4 col-md-6 col-12 mb-4 d-flex">
+              <div class="card shadow tutor_card flex-fill">
                 <div class="card-header pb-0 p-3">
                   <h5 class="card_title mb-0">{{ tutor.name }}</h5>
                 </div>
+                <div class="card-image">
+                  <img class="tutor-img" src=" {{ tutor.image_address }}"> 
+                </div>
                 <div class="card-body pb-0 p-3">
-                  <p class="card_content"><strong>Majors:</strong>{{ tutor.majors }}</p>
-                  <p class="card_content"><strong>Minors:</strong>{{ tutor.minors }}</p>
-                  <p class="card_content"><strong>Interests:</strong>{{ tutor.interests }}</p>
-                  <p class="card_content"><strong>Languages:</strong>{{ tutor.languages }}</p>
-                  <p class="card_content"><strong>Pronouns:</strong>{{ tutor.pronouns }}</p>
-                  <p class="card_content"><strong>Hometown:</strong>{{ tutor.hometown }}</p>
+                  <p class="card_content"><strong>Majors: </strong>{{ tutor.majors }}</p>
+                  <p class="card_content"><strong>Minors: </strong>{{ tutor.minors }}</p>
+                  <p class="card_content"><strong>Interests: </strong>{{ tutor.interests }}</p>
+                  <!--  <p class="card_content"><strong>Languages: </strong>{{ tutor.languages }}</p>
+                  <p class="card_content"><strong>Pronouns: </strong>{{ tutor.pronouns }}</p>
+                  <p class="card_content"><strong>Hometown: </strong>{{ tutor.hometown }}</p> -->
                 </div>
                 <div class="card-footer pt-0 p-3 d-flex align-items-center">
-                  <div class="w-60"></div>
+                  <div class="w-60">
+                    <button class="icon-btn like-btn" title="Favorite">
+                      <i class="fa fa-heart-o"></i>
+                    </button>
+                    <button class="icon-btn info-btn" data-bs-toggle="modal" data-bs-target="#tutorModal-{{ tutor.id }}"title="More Info">
+                      <i class="fa fa-info-circle"></i>
+                    </button>
+                    
+                  </div>
                 </div>
               </div>
             </div>

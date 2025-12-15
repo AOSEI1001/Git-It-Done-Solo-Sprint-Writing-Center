@@ -99,6 +99,7 @@ def load_tutor_profiles():
             name=row.get("Name", ""),
             role=row.get("Role", ""),
             email=row.get("Email", ""),
+            image_address=row.get("Image Address", ""),
             interests=row.get("Interests", ""),
             classYear=row.get("Class Year", ""),
             pronouns=row.get("Pronouns", ""),
