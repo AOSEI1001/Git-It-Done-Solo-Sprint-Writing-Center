@@ -40,6 +40,7 @@ class TutorProfile(db.Model):
     hometown = db.Column(db.String(200), nullable=False)
     majors = db.Column(db.String(200), nullable=False)
     minors = db.Column(db.String(200), nullable=False)
+    image_address = db.Column(db.String(200), nullable=False)
     languages = db.Column(db.String(200), nullable=False)
     active = db.Column(db.Boolean, default=True)
 

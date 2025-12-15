@@ -28,8 +28,8 @@
   <!-- Nucleo Icons -->
   <link href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-svg.css" rel="stylesheet" />
-  <!-- Font Awesome Icons 
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> -->
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> 
   <!-- CSS Files -->
   <link id="pagestyle" href="../static/css/soft-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
   <link id="pagestyle" href="../static/css/catalogCustom.css" rel="stylesheet" />
@@ -240,16 +240,27 @@
                 <div class="card-header pb-0 p-3">
                   <h5 class="card_title mb-0">{{ tutor.name }}</h5>
                 </div>
+                <div class="card-image">
+                  <img class="tutor-img" src=" {{ tutor.image_address }}"> 
+                </div>
                 <div class="card-body pb-0 p-3">
                   <p class="card_content"><strong>Majors:</strong>{{ tutor.majors }}</p>
                   <p class="card_content"><strong>Minors:</strong>{{ tutor.minors }}</p>
                   <p class="card_content"><strong>Interests:</strong>{{ tutor.interests }}</p>
-                  <p class="card_content"><strong>Languages:</strong>{{ tutor.languages }}</p>
+                  <!--  <p class="card_content"><strong>Languages:</strong>{{ tutor.languages }}</p>
                   <p class="card_content"><strong>Pronouns:</strong>{{ tutor.pronouns }}</p>
-                  <p class="card_content"><strong>Hometown:</strong>{{ tutor.hometown }}</p>
+                  <p class="card_content"><strong>Hometown:</strong>{{ tutor.hometown }}</p> -->
                 </div>
                 <div class="card-footer pt-0 p-3 d-flex align-items-center">
-                  <div class="w-60"></div>
+                  <div class="w-60">
+                    <button class="icon-btn like-btn" title="Favorite">
+                      <i class="fa fa-heart-o"></i>
+                    </button>
+                    <button class="icon-btn info-btn" data-bs-toggle="modal" data-bs-target="#tutorModal-{{ tutor.id }}"title="More Info">
+                      <i class="fa fa-info-circle"></i>
+                    </button>
+                    
+                  </div>
                 </div>
               </div>
             </div>

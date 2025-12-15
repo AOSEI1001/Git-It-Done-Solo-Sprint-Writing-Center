@@ -27,25 +27,32 @@
 .tutor_grid{
     width: 100%;
     display : grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
+    align-items: stretch;
 }
 
 .tutor-card{
-    height: 300px;
+    height: 100%;
     display : flex;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     flex-direction: column;
     border-radius: 0.5rem;
     padding: 1rem;
     gap: 1rem;
-    overflow: hidden;
     
 }
 
-
 .tutor-card .card-body{
+    flex-grow: 1;
     overflow-y: auto;
+}
+
+
+#tutor_grid > .col-lg-4,
+#tutor_grid > .col-md-6,
+#tutor_grid > .col-12 {
+    display: flex;
 }
 
 .tutor-card:hover{
@@ -53,9 +60,30 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.tutor-img {
+    width: 190px;
+    height: 190px;
+    border-radius: 5%;
+    object-fit: cover;
+}
+
+.card-image{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+
+}
+
+.icon-btn{
+    all: unset;
+    cursor: pointer;
+
+}
+
 
 @media (min-width: 768px) {
     .tutor_grid{
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     }
 }
