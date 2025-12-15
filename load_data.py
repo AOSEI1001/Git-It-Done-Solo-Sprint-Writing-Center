@@ -96,16 +96,16 @@ def load_tutor_profiles():
     rows = get_sheet_rows()
     for row in rows:
         profile = TutorProfile(
-            name=row.get("name", ""),
-            role=row.get("role", ""),
-            email=row.get("email", ""),
-            interests=row.get("interests", ""),
-            classYear=row.get("classYear", ""),
-            pronouns=row.get("pronouns", ""),
-            hometown=row.get("hometown", ""),
-            majors=row.get("majors", ""),
-            minors=row.get("minors", ""),
-            languages=row.get("languages", ""),
+            name=row.get("Name", ""),
+            role=row.get("Role", ""),
+            email=row.get("Email", ""),
+            interests=row.get("Interests", ""),
+            classYear=row.get("Class Year", ""),
+            pronouns=row.get("Pronouns", ""),
+            hometown=row.get("Hometown", ""),
+            majors=row.get("Majors", ""),
+            minors=row.get("Minors", ""),
+            languages=row.get("Languages", ""),
             active=row.get("active", "True").lower() in ("true", "1", "yes")
         )
         db.session.add(profile)

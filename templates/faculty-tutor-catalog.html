@@ -233,31 +233,28 @@
         </div>
         
         <div class="tutor-grid-container card p-4 ">
-          <div id="tutor_grid" class="tutor_grid mt-4">
-
-              <div class="card-wrapper mb-4"> 
-
-                {% for tutor in tutors %}
-                <div class="card shadow tutor_card">
-                  <div class="card-header pb-0 p-3">
-                    <h5 class="card_title" id="request_title" class="mb-0">{{ tutor.name}}</h5>
-                  </div>
-                  <div class="card-body pb-0 p-3">
-                    <p class="card_content"><strong>Majors:</strong>{{ tutor.majors}}</p>
-                    <p class="card_content"><strong>Minors:</strong>{{ tutor.minors}}</p>
-                    <p class="card_content"><strong>Interests:</strong>{{ tutor.interests}}</p>
-                    <p class="card_content"><strong>Languages:</strong>{{ tutor.languages}}</p>
-                    <p class="card_content"><strong>Pronouns:</strong>{{ tutor.pronouns}}</p>
-                    <p class="card_content"><strong>Hometown</strong>{{ tutor.hometown}}</p>
-                  </div>
-                  
-                  <div class="card-footer pt-0 p-3 d-flex align-items-center">
-                    <div class="w-60">
-                  </div>
-                  {% endfor %}
+          <div id="tutor_grid" class="row mt-4">
+            {% for tutor in tutors %}
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+              <div class="card shadow tutor_card">
+                <div class="card-header pb-0 p-3">
+                  <h5 class="card_title mb-0">{{ tutor.name }}</h5>
+                </div>
+                <div class="card-body pb-0 p-3">
+                  <p class="card_content"><strong>Majors:</strong>{{ tutor.majors }}</p>
+                  <p class="card_content"><strong>Minors:</strong>{{ tutor.minors }}</p>
+                  <p class="card_content"><strong>Interests:</strong>{{ tutor.interests }}</p>
+                  <p class="card_content"><strong>Languages:</strong>{{ tutor.languages }}</p>
+                  <p class="card_content"><strong>Pronouns:</strong>{{ tutor.pronouns }}</p>
+                  <p class="card_content"><strong>Hometown:</strong>{{ tutor.hometown }}</p>
+                </div>
+                <div class="card-footer pt-0 p-3 d-flex align-items-center">
+                  <div class="w-60"></div>
                 </div>
               </div>
-          </div>
+            </div>
+            {% endfor %}
+          </div> 
         </div>
       </div>
       
