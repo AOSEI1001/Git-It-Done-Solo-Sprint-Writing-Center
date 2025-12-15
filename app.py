@@ -3,6 +3,7 @@ from load_data import load_tutor_profiles
 from views import main_blueprint
 from models import TutorProfile, db
 from auth import auth_blueprint
+from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'

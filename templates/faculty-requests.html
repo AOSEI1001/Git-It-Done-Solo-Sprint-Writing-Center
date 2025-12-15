@@ -228,7 +228,7 @@
 
               <div class="modal fade" id="createRequestModal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
-                  <form id="createRequestForm"> 
+                  <form id="createRequestForm" method="POST" action="{{ url_for('main.create_tutor_request') }}"> 
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title">Create New Tutor Request</h5>
@@ -238,27 +238,36 @@
                       <div class="modal-body">
                         <div class="mb-3">
                           <label class="form-label">Course Name and Number</label>
-                          <input id="title" type="text" name="title" class="form-control" required>
+                          <input id="title" type="text" name="courseName" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
                           <label class="form-label">Faculty Member Name</label>
-                          <input id="prof_name" type="professor_name" name="prof_name" class="form-control" required>
+                          <input id="prof_name" type="professor_name" name="facultyName" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
                           <label class="form-label">Faculty Colby Email</label>
-                          <input id="prof_email" type="text" name="prof_email" class="form-control" required>
+                          <input id="prof_email" type="text" name="facultyEmail" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                          <label class="form-label">Requested Tutor</label>
-                          <input type="text" name="requested_tutor" class="form-control" optional>
+                          <label class="form-label">Requested Tutor (optional)</label>
+                          <select name="requestedTutorId" class="form-select">
+                            <option value="">No preference</option>
+
+                            {% for tutor in tutors %}
+                              <option value="{{ tutor.id }}">
+                                {{ tutor.name }} — {{ tutor.classYear }}
+                              </option>
+                            {% endfor %}
+                          </select>
                         </div>
+
 
                         <div class="mb-3">
                           <label class="form-label">Course Description</label>
-                          <input type="text" name="course_desc" class="form-control" required>
+                          <input type="text" name="courseDescription" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
@@ -290,39 +299,32 @@
 
         <div class="request-container card bg-light shadow-sm p-3">
         <div id="request_grid" class="row mt-4">
-
-          <template id = "request_card_temp">
+          {% for req in requests %}
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
               <div class="card shadow request_card">
-                <div class="card-header pb-0 p-3">
-                  <h6 class="card_title" id="request_title" class="mb-0">Request</h6>
+                <div class="card-header">
+                  <h6>{{ req.courseName }}</h6>
                 </div>
-                <div class="card-body pb-0 p-3">
-                  <p class="card_prof">sample </p>
-                </div>
-                <div class="card-footer pt-0 p-3 d-flex align-items-center">
-                  <div class="w-60">
-                    <!-- <p "card-title">View </p> -->
-                  </div>
-
-                  <!-- to be implemented: small icons for profiles associated with request 
-                                          small icons for additonal request info, edit and delete
-                  
-                  
-                  
-                  -->
-                  <div class="w-40 text-end">
-                    <!-- <a class="btn btn-dark mb-0 text-end" href="javascript:;">View all reviews</a> -->
+                <div class="card-body">
+                  <p>{{ req.facultyName }}</p>
+                  <p>Status: {{ req.requestStatus }}</p>
                 </div>
               </div>
-          </template>
+            </div>
+          {% endfor %}
         </div>
-      </div>
-    </div>
-  </div>
- 
-      
-      
-      
+
+        <template id="request_card_temp">
+          <div class="card shadow request_card">
+            <div class="card-header">
+              <h6 class="card_title"></h6>
+            </div>
+            <div class="card-body">
+              <p class="card_prof"></p>
+              <p>Status: Open</p>
+            </div>
+          </div>
+        </template>
     </div>
   </main>
      

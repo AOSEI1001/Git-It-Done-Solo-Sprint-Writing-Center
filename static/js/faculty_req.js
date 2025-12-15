@@ -1,33 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    document.getElementById("createRequestForm").addEventListener("submit", function(e){
-        e.preventDefault();
-        // alert("Sumbit Clicked!");
+  document.getElementById("createRequestForm").addEventListener("submit", async function(e){
+    e.preventDefault();
 
-        const request_title = document.getElementById("title").value;
-        const prof = document.getElementById("prof_name").value;
-        // const email = document.getElementById("prof_email").value;
-        // const desc = document.getElementById("course_desc").value;
+    const form = e.target;
+    const formData = new FormData(form);
 
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData
+      });
 
-        if(!request_title || !prof){
-            return;
-        }
+      if (!response.ok) {
+        throw new Error("Failed to create request");
+      }
 
-        const template = document.getElementById("request_card_temp");
-        const card = template.content.cloneNode(true);
+      const data = await response.json();
 
+      // Render card from SERVER response
+      const template = document.getElementById("request_card_temp");
+      const card = template.content.cloneNode(true);
 
-        card.querySelector(".card_title").textContent = request_title;
-        card.querySelector(".card_prof").textContent = prof;
-        // card.querySelector().textContent = email;
-        // card.querySelector().textContent = desc;
+      card.querySelector(".card_title").textContent = data.courseName;
+      card.querySelector(".card_prof").textContent = data.facultyName;
 
-        document.getElementById("request_grid").appendChild(card);
-        document.getElementById("createRequestForm").reset();
+      document.getElementById("request_grid").prepend(card);
 
-        
-    
-    });
+      form.reset();
+      // dismiss modal after success
+      const modalEl = document.getElementById("createRequestModal");
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      modal.hide();
+
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again.");
+    }
+  });
 });
-

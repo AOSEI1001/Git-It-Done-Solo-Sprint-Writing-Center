@@ -48,11 +48,11 @@ class TutorRequest(db.Model):
     __tablename__ = "tutorRequest"
     id = db.Column(db.Integer, primary_key=True)
     
-    professor_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    professor_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
     courseName = db.Column(db.String(200), nullable=False)
     facultyName = db.Column(db.String(200), nullable=False)
     facultyEmail = db.Column(db.String(200), nullable=False)
-    requestedTutor = db.Column(db.String(200), nullable=True)
+    requestedTutorId = db.Column(db.Integer, db.ForeignKey("tutorProfile.id"), nullable=True)
     courseDescription = db.Column(db.String(200), nullable=False)
     requestStatus = db.Column(db.String(200), nullable=False, default="Open")
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -66,3 +66,24 @@ class TutorAssignment(db.Model, UserMixin):
     tutor_id = db.Column(db.Integer, db.ForeignKey("tutorProfile.id"), nullable=False)
     request_id = db.Column(db.Integer, db.ForeignKey("tutorRequest.id"), nullable=False)
     assigned_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+class SuggestedMatch(db.Model):
+    __tablename__ = "suggestedMatch"
+
+    id = db.Column(db.Integer, primary_key=True)
+    request_id = db.Column(db.Integer, db.ForeignKey("tutorRequest.id"), nullable=False)
+    tutor_id = db.Column(db.Integer, db.ForeignKey("tutorProfile.id"), nullable=False)
+
+    score = db.Column(db.Float, nullable=False)
+    reason = db.Column(db.String(300))  # "Major match + language match"
+
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+class Notification(db.Model):
+    __tablename__ = "notification"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    message = db.Column(db.String(300))
+    read = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
