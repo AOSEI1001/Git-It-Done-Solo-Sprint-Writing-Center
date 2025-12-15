@@ -12,54 +12,6 @@ def normalize_list(value):
         return []
     return [v.strip().lower() for v in value.split(",")]
 
-
-# def find_suggested_tutors(tutor_request, limit=5):
-#     tutors = TutorProfile.query.filter_by(active=True).all()
-#     suggestions = []
-
-#     requested_id = tutor_request.requestedTutorId if tutor_request.requestedTutorId else None
-#     course_text = tutor_request.courseName.lower() + " " + tutor_request.courseDescription.lower()
-#     requested_name = None
-    
-#     if requested_id:
-#         requested_tutor = TutorProfile.query.get(requested_id)
-#         if requested_tutor:
-#             requested_name = requested_tutor.name.lower()
-
-#     for tutor in tutors:
-#         score = 0
-#         reasons = []
-
-#         tutor_majors = normalize_list(tutor.majors)
-#         tutor_languages = normalize_list(tutor.languages)
-
-#         # Requested tutor match
-#         if requested_name and requested_name in tutor.name.lower():
-#             score += 100
-#             reasons.append("Requested tutor")
-
-#         # Major / discipline match
-#         for major in tutor_majors:
-#             if major in course_text:
-#                 score += 50
-#                 reasons.append("Major match")
-#                 break
-
-#         # Language course match
-#         for lang in tutor_languages:
-#             if lang in course_text:
-#                 score += 30
-#                 reasons.append("Language match")
-#                 break
-
-#         if score > 0:
-#             suggestions.append((tutor, score, ", ".join(reasons)))
-
-#     # sort by score
-#     suggestions.sort(key=lambda x: x[1], reverse=True)
-#     return suggestions[:limit]
-
-
 @main_blueprint.route('/api/v1/admin-top-matches', methods=['GET'])
 def admin_top_matches():
     requests = TutorRequest.query.filter_by(requestStatus="Open").all()
