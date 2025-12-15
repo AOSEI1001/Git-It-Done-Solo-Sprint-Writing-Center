@@ -42,3 +42,22 @@ def tutor_catalog():
     tutors = TutorProfile.query.all()
     
     return render_template('faculty-tutor-catalog.html', tutors=tutors)
+
+
+@main_blueprint.route("/admin-dashboard")
+def admin_dashboard():
+    # tutors = TutorProfile.query.all()
+    
+    return render_template('admin-dashboard.html')
+
+@main_blueprint.route("/admin-matching")
+def admin_matching():
+    # tutors = TutorProfile.query.all()
+    
+    return render_template('admin-matching.html')
+
+@main_blueprint.route("/messages")
+def admin_messages():
+    # tutors = TutorProfile.query.all()
+    
+    return render_template('messages.html')

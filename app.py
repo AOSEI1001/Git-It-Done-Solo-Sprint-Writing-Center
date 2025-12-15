@@ -2,6 +2,7 @@ from flask import Flask
 from load_data import load_tutor_profiles
 from views import main_blueprint
 from models import TutorProfile, db
+from auth import auth_blueprint
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -18,6 +19,7 @@ with app.app_context():
     
 
 app.register_blueprint(main_blueprint)
+app.register_blueprint(auth_blueprint)
 
 if __name__ == '__main__':
     app.run(debug=True)

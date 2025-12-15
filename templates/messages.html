@@ -69,7 +69,7 @@
               </svg>
 
             </div>
-            <span class="nav-link-text ms-1">Faculty Dashboard</span>
+            <span class="nav-link-text ms-1">Admin Dashboard</span>
           </a>
         </li>
         <li class="nav-item">
@@ -89,7 +89,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active bg-secondary-subtle" href="../templates/billing.html">
+          <a class="nav-link bg-secondary-subtle" href="../templates/billing.html">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24">
                 <rect fill="none" height="24" width="24"/>
@@ -102,7 +102,7 @@
           </a> 
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{{ url_for('main.admin_matching') }}">
+          <a class="nav-link " href="{{ url_for('main.admin_matching') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="70%" height="70%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -120,7 +120,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{{ url_for('main.admin_messages') }}">
+          <a class="nav-link active "href="{{ url_for('main.admin_messages') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="70%" height="70%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <title>Messages</title>
@@ -159,7 +159,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{{ url_for('auth.signIn') }}">
+          <a class="nav-link " href="{{ url_for('auth.signIn') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>document</title>
@@ -188,10 +188,10 @@
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Faculty</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Requests</li>
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Messages</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Requests</h6>
+          <h6 class="font-weight-bolder mb-0">Messages</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -207,124 +207,34 @@
                   <i class="sidenav-toggler-line"></i>
                 </div>
               </a>
-            </li>
-            
-            
-                
-                
+            </li>       
           </ul>
         </div>
       </div>
     </nav>
+
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-lg-6 col-12">
-          <div class="row">
-            <div class="col-lg-6 col-md-6 col-12">
-              <div class="nav-item d-flex align-items-center">
-                <button class="btn btn-outline-primary btn-sm mb-0 me-3" data-bs-toggle="modal" data-bs-target="#createRequestModal">Create New Request</button>
-              </div> 
-
-              <div class="modal fade" id="createRequestModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                  <form id="createRequestForm"> 
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Create New Tutor Request</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                      </div>
-
-                      <div class="modal-body">
-                        <div class="mb-3">
-                          <label class="form-label">Course Name and Number</label>
-                          <input id="title" type="text" name="title" class="form-control" required>
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label">Faculty Member Name</label>
-                          <input id="prof_name" type="professor_name" name="prof_name" class="form-control" required>
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label">Faculty Colby Email</label>
-                          <input id="prof_email" type="text" name="prof_email" class="form-control" required>
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label">Requested Tutor</label>
-                          <input type="text" name="requested_tutor" class="form-control" optional>
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label">Course Description</label>
-                          <input type="text" name="course_desc" class="form-control" required>
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label">Upload File</label>
-                          <input type="file" name="file_upload" class="form-control" optional>
-                        </div>
-
-                        <!-- to be implemented request tag chips
-                         <div class="mb-3">
-                          <label class="form-label">Course Tags</label>
-                          <input type="text" name="requested_tutor" class="form-control" required>
-                        </div>
-                      -->
-
-                      </div>
-
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-                      </div>
-                    </div>
-                  </form>
+            <div class="card-container">
+                <div class="card header pb-0">
+                    <h6>Pending Tutor Requests</h6>
                 </div>
-              </div>
+
+                <div class="card-body">
+                    <div id="requests-container"></div>
+                    
+                </div>
             </div>
-          </div>
-        </div>
-        
-        <div id="request_grid" class="row mt-4">
-
-          <template id = "request_card_temp">
-              <div class="card shadow request_card">
-                <div class="card-header pb-0 p-3">
-                  <h6 class="card_title" id="request_title" class="mb-0">Request</h6>
-                </div>
-                <div class="card-body pb-0 p-3">
-                  <p class="card_prof">sample </p>
-                </div>
-                <div class="card-footer pt-0 p-3 d-flex align-items-center">
-                  <div class="w-60">
-                    <p "card-title">View </p>
-                  </div>
-
-                  <!-- to be implemented: small icons for profiles associated with request 
-                                          small icons for additonal request info, edit and delete
-                  
-                  
-                  
-                  -->
-                  <div class="w-40 text-end">
-                    <!-- <a class="btn btn-dark mb-0 text-end" href="javascript:;">View all reviews</a> -->
-                  </div>
-                </div>
-              </div>
-          </template>
-        </div>
+          
+        </div>    
       </div>
-      
-      
-      
-      
     </div>
   </main>
      
   <!--   Core JS Files   -->
-  <script src="../static/js/faculty_req.js"></script>
+  <script src="../static/js/admin_match.js"></script>
   <script src="../static/js/core/popper.min.js"></script>
   <script src="../static/js/core/bootstrap.min.js"></script>
   <script src="../static/js/plugins/perfect-scrollbar.min.js"></script>
