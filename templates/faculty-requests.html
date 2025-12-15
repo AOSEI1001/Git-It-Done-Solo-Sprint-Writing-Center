@@ -298,13 +298,15 @@
         
         <div id="request_grid" class="row mt-4">
           {% for req in requests %}
-            <div class="card shadow request_card">
-              <div class="card-header">
-                <h6>{{ req.courseName }}</h6>
-              </div>
-              <div class="card-body">
-                <p>{{ req.facultyName }}</p>
-                <p>Status: {{ req.requestStatus }}</p>
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+              <div class="card shadow request_card">
+                <div class="card-header">
+                  <h6>{{ req.courseName }}</h6>
+                </div>
+                <div class="card-body">
+                  <p>{{ req.facultyName }}</p>
+                  <p>Status: {{ req.requestStatus }}</p>
+                </div>
               </div>
             </div>
           {% endfor %}
