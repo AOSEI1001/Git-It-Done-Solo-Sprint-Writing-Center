@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const requestContainer = document.getElementById("requests-container");
+    const requestContainer = document.getElementById("pending-requests-container");
 
     fetch("/api/v1/admin-top-matches")
         .then(response => response.json())
