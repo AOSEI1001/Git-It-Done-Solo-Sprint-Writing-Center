@@ -7,78 +7,55 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             data.forEach(request => {
                 const requestRow = document.createElement("div");
-                requestRow.classList.add("request-row", "card", "mb-3");
-                requestRow.requestId = request.id;
+                requestRow.classList.add("card", "mb-3", "p-2");
+                requestRow.requestId = request.request_id;
 
-                let selectedTutorId = null;
-
+                // Request details
                 const requestContent = document.createElement("div");
-                requestContent.classList.add("request-content", "card-body");
+                requestContent.classList.add("card-body");
+                requestContent.innerHTML = `
+                    <h5>${request.courseName} - ${request.professorName}</h5>
+                    <p>${request.details}</p>
+                `;
 
+                // Only display top match
+                const topTutor = request.suggestedTutors[0];
+                const topTutorDiv = document.createElement("div");
+                topTutorDiv.classList.add("top-tutor", "mb-2");
+                if (topTutor) {
+                    topTutorDiv.innerHTML = `
+                        <strong>Top Match:</strong> ${topTutor.tutorName} (Score: ${topTutor.score})<br>
+                        Reasons: ${topTutor.reason}
+                    `;
+                } else {
+                    topTutorDiv.innerHTML = `<em>No matches found</em>`;
+                }
 
-                requestContent.innerHTML = `<h5>${request.courseName} - ${request.professorName}</h5>
-                <p>${request.details}</p>`;
-
-
-                const topTutorContainer = document.createElement("div");
-                topTutorContainer.classList.add("d-flex", "flex-wrap", "suggested-tutors", "mb-2");
-
-                const operationDiv = document.createElement("div");
-                operationDiv.classList.add("operation-btns", "d-none", "mt-2");
-
+                // Confirm button
                 const confirmBtn = document.createElement("button");
-                confirmBtn.innerText = "Confirm";
-                confirmBtn.classList.add("confirm-btn", "btn", "btn-success", "me-2");
+                confirmBtn.classList.add("btn", "btn-success", "mt-2");
+                confirmBtn.innerText = "Confirm Assignment";
 
                 confirmBtn.addEventListener("click", () => {
-                        fetch("/api/confirm-match", { method: "POST",
-                            body : JSON.stringify({
-                                request_id : request.id,
-                                tutor_id : selectedTutorId
-                            })
-                        })
-                            .then(response => response.json())
-                            .then(data => {
-                                alert(data.message)
-                            });
-                        });
-
-                    const cancelBtn = document.createElement("button");
-                    cancelBtn.innerText = "Cancel";
-                    cancelBtn.classList.add("cancel-btn", "btn", "btn-danger");
-                    cancelBtn.addEventListener("click", () => {  
-                        selectedTutorId = null;
-                        operationDiv.classList.add("d-none");
-
-                        topTutorContainer.querySelectorAll(".tutor-select-btn").forEach(btn => btn.classList.remove("active"));
-
+                    if (!topTutor) return alert("No tutor to assign!");
+                    fetch("/assign-tutor", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: `request_id=${request.request_id}&tutor_id=${topTutor.tutor_id}`
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        alert(data.message || "Tutor assigned successfully!");
+                        requestRow.querySelector(".card-body").insertAdjacentHTML(
+                            "beforeend",
+                            `<p class="text-success mt-2"><strong>Assigned to:</strong> ${topTutor.tutor_name}</p>`
+                        );
+                        confirmBtn.disabled = true;
                     });
-                        
-                    operationDiv.append(confirmBtn, cancelBtn);
+                });
 
-                    request.suggestedTutors.forEach(tutor => {
-                        const tutorSelectBtn = document.createElement("button");
-                        tutorSelectBtn.classList.add("tutor-select-btn", "btn", "btn-outline-primary", "m-1");
-                        tutorSelectBtn.innerText = tutor.name;
-                        tutorSelectBtn.dataset.tutorId = tutor.id;
-
-                        tutorSelectBtn.addEventListener("click", () => {
-                            selectedTutorId = tutor.id;
-
-                            topTutorContainer.querySelectorAll(".tutor-select-btn").forEach(btn => btn.classList.remove("active"));
-                            tutorSelectBtn.classList.add("active");
-                            operationDiv.classList.remove("d-none");    
-
-                        });
-                        
-                        topTutorContainer.appendChild(tutorSelectBtn);
-
-                    });
-                    requestRow.append(requestContent, topTutorContainer, operationDiv);
-                    requestContainer.appendChild(requestRow);
-                
-
+                requestRow.append(requestContent, topTutorDiv, confirmBtn);
+                requestContainer.appendChild(requestRow);
+            });
         });
-    });
-
 });
