@@ -101,7 +101,8 @@ def create_tutor_request():
         facultyEmail=request.form['facultyEmail'],
         requestedTutorId=request.form.get('requestedTutorId'),
         courseDescription=request.form['courseDescription'],
-        requestStatus="Open"
+        requestStatus="Open",
+        majors=request.form.get('majors')
     )
 
     db.session.add(new_request)
@@ -138,15 +139,16 @@ def admin_matching():
 
 @main_blueprint.route("/admin/match/<int:request_id>", methods=["GET"])
 def match_request(request_id):
-    request = TutorRequest.query.get(request_id)
-    matches = generate_suggested_matches(request)
+    tutor_request = TutorRequest.query.get(request_id)
+    matches = generate_suggested_matches(tutor_request)
 
     # Convert to JSON
     data = [
-        {"tutorName": m[0].name, "score": round(m[1]*100, 1)}
+        {"tutorName": m["tutorName"], "score": m["score"]}
         for m in matches
     ]
     return jsonify(data)
+
 
 @main_blueprint.route("/messages", methods=["GET"])
 def admin_messages():

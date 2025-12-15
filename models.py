@@ -56,6 +56,8 @@ class TutorRequest(db.Model):
     courseDescription = db.Column(db.String(200), nullable=False)
     requestStatus = db.Column(db.String(200), nullable=False, default="Open")
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    majors = db.Column(db.String(200), nullable=True)  # <-- NEW
+
 
 
 class TutorAssignment(db.Model, UserMixin):

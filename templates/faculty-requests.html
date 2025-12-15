@@ -264,6 +264,11 @@
                           </select>
                         </div>
 
+                        <div class="mb-3">
+                          <label for="majorsInput" class="form-label">Preferred Majors</label>
+                          <input type="text" class="form-control" id="majorsInput" name="majors" placeholder="e.g., Computer Science, Math">
+                          <small class="form-text text-muted">Comma-separated list, optional.</small>
+                        </div>
 
                         <div class="mb-3">
                           <label class="form-label">Course Description</label>
@@ -286,7 +291,7 @@
 
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                        <button type="submit" class="btn btn-primary" >Submit</button>
                       </div>
                     </div>
                   </form>
@@ -308,25 +313,26 @@
                 <div class="card-body">
                   <p>{{ req.facultyName }}</p>
                   <p>Status: {{ req.requestStatus }}</p>
+                  <button class="btn btn-sm btn-primary generate_match_btn" data-request-id="{{ req.id }}">Generate Matches</button>
+                  <div class="match_results mt-2"></div>
                 </div>
               </div>
             </div>
           {% endfor %}
         </div>
 
-        <template id="request_card_temp">
-          <div class="card shadow request_card">
-            <div class="card-header">
-              <h6 class="card_title"></h6>
-            </div>
-            <div class="card-body">
-              <p class="card_prof"></p>
-              <p>Status: Open</p>
-              <button class="btn btn-sm btn-primary generate_match_btn" data-request-id="{{ req.id }}">Generate Matches</button>
-              <div id="match_results" class="mt-2"></div>
-            </div>
+       <template id="request_card_temp">
+        <div class="card shadow request_card">
+          <div class="card-header">
+            <h6 class="card_title"></h6>
           </div>
-        </template>
+          <div class="card-body">
+            <p class="card_prof"></p>
+            <p>Status: Open</p>
+          </div>
+        </div>
+      </template>
+
     </div>
   </main>
      
